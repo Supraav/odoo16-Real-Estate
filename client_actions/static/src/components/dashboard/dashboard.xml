@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="client_actions.EmptyDashboard" owl="1">
+
+        <t t-set="hello" t-value="1" />
+
+        <t t-if="hello == 1">
+            <h1>Hero</h1>
+        </t>
+
+        <t t-else="">
+            <h2>Nahero</h2>
+        </t>
+    </t>
+
+</templates>
