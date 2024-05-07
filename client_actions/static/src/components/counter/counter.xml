@@ -8,10 +8,16 @@
             <button class="btn btn-primary" t-on-click="increment">Increment</button>
             <br/>
             <button class="btn btn-primary" t-on-click="decrement">Decrement</button>
-
-            <Extract/>
+            <br/>
+            <!-- <Extract/> -->
             <br />
             <TodoList/>
+            <br/>
+            <Card>
+                <t t-set-slot="title">WR10</t>
+                <t t-set-slot="content">wazaaaaaaaaaaaaaa</t>
+            </Card>
+            <br/>
         </div>
     </t>
 </templates>

@@ -5,8 +5,9 @@ import { registry } from "@web/core/registry";
 import {Extract} from "../extract/extract"
 import {Todo} from "../todo/todo"
 import { TodoList } from "../todo_list/todo_list";
+import { Card } from "../card/card";
  
-class Counter extends Component {
+export class Counter extends Component {
     static template = "client_actions.Counter";
     setup() {
         this.state = useState({ value: 0 });
@@ -18,7 +19,7 @@ class Counter extends Component {
         this.state.value--;
     }
     
-    static components = {Extract,TodoList}
+    static components = {Card,TodoList}
 }
 
 registry.category("actions").add("client_actions.counter_menu", Counter);
