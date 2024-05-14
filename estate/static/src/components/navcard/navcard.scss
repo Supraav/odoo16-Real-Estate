@@ -1,0 +1,17 @@
+.navcard{
+    border:1px solid black;
+    border-radius: 15px;
+    box-shadow: 7px 7px 1px black;
+    text-align: center;
+    width: auto;
+    height:150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+.card-title {
+    margin-top: 10px; 
+}

@@ -1,5 +1,5 @@
 {
-    'name': "Awesome Tshirts",
+    'name': "Project Dashboard",
     'version': '1.0',
     'depends': ['base','web'],
     'author': "Author Name",
@@ -13,9 +13,9 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'awesome_tshirts/static/src/**/**/*.js',
-            'awesome_tshirts/static/src/**/**/*.xml',
-            'awesome_tshirts/static/src/**/**/*.scss',
+            'project_dashboard/static/src/**/**/*.js',
+            'project_dashboard/static/src/**/**/*.xml',
+            'project_dashboard/static/src/**/**/*.scss',
         ],
     },
 }

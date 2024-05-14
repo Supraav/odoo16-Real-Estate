@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="project_dashboard.CustomDashboard" owl="1">
+        <div class="o_action">
+            <Layout display="{ controlPanel: { 'top-right' : false, 'bottom-right': false } }">
+                <t t-set-slot="control-panel-bottom-left">
+                    <button type="button" class="btn btn-primary" t-on-click="onCustomers">Customers</button>
+                    <button type="button" class="btn btn-primary">New Orders</button>
+                    <button type="button" class="btn btn-primary">Cancelled Orders</button>
+                </t>
+            </Layout>
+        </div>
+    </t>
+</templates>

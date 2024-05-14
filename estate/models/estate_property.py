@@ -93,6 +93,60 @@ class EstateProperty(models.Model):
                 return ("Property deleted successfully")
             else:
                 raise UserError("Only new or canceled properties can be sold")
+            
+    @api.model
+    def get_statistics(self):
+        total_properties=self.search_count([])
+
+        total_expected_price = sum(property.expected_price for property in self.search([]))
+        average_expected_price = total_expected_price / total_properties if total_properties else 0
+
+        total_sold_properties=self.search_count([('state','=','sold')])
+
+        # property by type 
+        property_types = self.env['estate.property.type'].search([])
+        properties_by_type = {}
+        for property_type in property_types:
+            properties_count = self.search_count([('property_type_id', '=', property_type.id)])
+            properties_by_type[property_type.name] = properties_count
+
+        # property by tag 
+        property_tags = self.env['estate.property.tag'].search([])
+        properties_by_tag = {}
+        for property_tag in property_tags:
+            properties_tag_count = self.search_count([('property_tag_ids', '=', property_tag.id)])
+            properties_by_tag[property_tag.name] = properties_tag_count
+
+
+        # All the estates in asc order{bar graph }
+        properties = self.search([], order='expected_price asc')
+        property_names = [prop.name for prop in properties]
+        property_expected_prices = [prop.expected_price for prop in properties]
+
+        expected_price_distribution = {
+            name: price for name, price in zip(property_names, property_expected_prices)
+        }
+
+        living_area_properties = self.search([], order='expected_price asc')
+        living_area_property_names = [prop.name for prop in living_area_properties]
+        living_area_property_prices = [prop.living_area for prop in properties]
+        living_area_distribution = {
+            name: price for name, price in zip(living_area_property_names, living_area_property_prices)
+        }
+
+        date_7_days_ago = datetime.today() - timedelta(days=7)
+        total_sales_revenue = sum(property.selling_price for property in self.search([('state', '=', 'sold'), ('write_date', '>=', date_7_days_ago)]))
+        
+        return{
+            'total_properties':total_properties,
+            'average_expected_price':round(average_expected_price,3),
+            'total_sold_properties': total_sold_properties,
+            "properties_by_type": properties_by_type,
+            "properties_by_tag": properties_by_tag,
+            'expected_price_distribution': expected_price_distribution,
+            'living_area_distribution': living_area_distribution,
+            'total_sales_revenue_last_7_days': total_sales_revenue,
+        }
 
 
 # PROPERTY TYPE 

@@ -15,5 +15,12 @@
         'views/estate_property_tags.xml',
         'views/estate_property_offer.xml',
         'views/estate_property_inherited.xml',
-    ]
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'estate/static/src/**/**/*.js',
+            'estate/static/src/**/**/*.xml',
+            'estate/static/src/**/**/*.scss',
+        ],
+    },
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="estate.EstateDashboard" owl="1">
+
+        <Layout display="this.display">
+            <t t-set-slot="control-panel-bottom-left">
+                <button type="button" class="btn btn-primary" t-on-click="onProperty">Properties</button>
+                <button type="button" class="btn btn-primary" t-on-click="openSoldProperties">Sold Properties</button>
+                <button type="button" class="btn btn-primary" t-on-click="openUnsoldProperties">Unsold Properties</button>
+            </t>
+        </Layout>
+            <t t-call="estate.clientaction.statistics"/>
+
+            <div class="dashboard">
+                <div class="row">
+                    <div class="col-5 m-3">
+                        <Card className="'w-100'">
+                            <t t-set-slot="title">All The Estates</t>
+                            <BarChart data="statistics['expected_price_distribution']"/>
+                        </Card>
+                    </div>
+
+                    <div class="col-5 m-3">
+                        <Card className="'w-100'">
+                            <t t-set-slot="title">Properties by Types</t>
+                            <PieChart data="statistics['properties_by_type']" label="'Properties by Type'"/>
+                        </Card>
+                    </div>
+
+                    <div class="col-5 m-3">
+                        <Card className="'w-100'">
+                            <t t-set-slot="title">Properties by Tags</t>
+                            <PieChart data="statistics['properties_by_tag']" label="'Properties by Tags'"/>
+                        </Card>
+                    </div>
+
+                    <div class="col-5 m-3">
+                        <Card className="'w-100'">
+                            <t t-set-slot="title">Living Area</t>
+                            <LineChart data="statistics['living_area_distribution']" label="'Living Area'"/>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+    </t>
+
+    <t t-name="estate.clientaction.statistics" owl="1">
+        <div class="dashboard-NavCard">
+            <div t-foreach="this.keyToString" t-as="key" t-key="key" class="inner_NavCard">
+                <NavCard>
+                    <t t-set-slot="title">
+                        <t t-esc="keyToString[key]"/>
+                    </t>
+                    <p class="card-text">
+                        <t t-if="key === 'total_sales_revenue_last_7_days'">
+                            <t t-esc="statistics[key].toLocaleString('en-US', { style: 'currency', currency: 'USD' })"/>
+                        </t>
+
+                        <t t-else="">
+                            <t t-esc="statistics[key]"/>
+                        </t>
+                    </p>
+                </NavCard>
+            </div>
+        </div>
+    </t>
+</templates>
+
+<!-- d-flex flex-nowrap -->
+<!-- style="height:100px; -->
